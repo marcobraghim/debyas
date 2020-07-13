@@ -1,5 +1,4 @@
 import 'package:debyas/views/layout/database_menu_bar.dart';
-import 'package:debyas/views/layout/navi_rail_menu.dart';
 import 'package:debyas/views/layout/sidebar.dart';
 import 'package:debyas/views/layout/top_menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,11 +45,15 @@ class Layout {
               children: [
                 TopMenu(),
                 Expanded(
-                  child: Row(
+                  child: Stack(
+                    alignment: Alignment
+                        .topLeft, // Inverte os itens para DatabaseMenuBar ficar acima do conteudo
                     children: [
-                      // NaviRailMenu(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 51),
+                        child: content,
+                      ),
                       DatabaseMenuBar(),
-                      Expanded(child: content),
                     ],
                   ),
                 ),

@@ -51,13 +51,36 @@ class _DatabaseMenuBarState extends State<DatabaseMenuBar> {
             _delaying = false;
           });
         },
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 100),
         padding: const EdgeInsets.all(5),
-        width: _isExtended ? 300 : 50,
-        color: LayoutColors.secondary,
+        width: _isExtended ? 300 : 51,
+        decoration: BoxDecoration(
+          color: LayoutColors.secondary,
+          border: Border(
+            right: BorderSide(
+              width: 1,
+              color: LayoutColors.darkness,
+            ),
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: GestureDetector(
+                child: MouseRegion(
+                  child: IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.bars,
+                      color: LayoutColors.ligthness,
+                    ),
+                    onPressed: () => print('Options'),
+                  ),
+                  cursor: SystemMouseCursors.click,
+                ),
+              ),
+            ),
             item('tooba', 0),
             item('buster', 1),
             item('cereo', 2),
@@ -102,21 +125,24 @@ class _DatabaseMenuBarState extends State<DatabaseMenuBar> {
                   : SizedBox.shrink(),
               _showItemText()
                   ? InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: LayoutColors.ligth.withOpacity(.3),
-                          border: Border.all(
-                            width: 1,
-                            color: LayoutColors.ligth,
+                      child: Tooltip(
+                        message: 'Encerrar esta conexão',
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: LayoutColors.ligth.withOpacity(.3),
+                            border: Border.all(
+                              width: 1,
+                              color: LayoutColors.ligth,
+                            ),
                           ),
-                        ),
-                        padding: const EdgeInsets.all(7),
-                        margin: const EdgeInsets.only(right: 10),
-                        child: Icon(
-                          FontAwesomeIcons.trashAlt,
-                          color: LayoutColors.ligthness,
-                          size: 16,
+                          padding: const EdgeInsets.all(7),
+                          margin: const EdgeInsets.only(right: 10),
+                          child: Icon(
+                            Icons.cloud_off,
+                            color: LayoutColors.ligthness,
+                            size: 16,
+                          ),
                         ),
                       ),
                       onTap: () => print('Excluir $name'),
