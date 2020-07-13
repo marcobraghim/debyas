@@ -37,7 +37,7 @@ class UserProfile extends StatelessWidget {
               ),
               IconButton(
                 icon: Icon(
-                  FontAwesomeIcons.cogs,
+                  FontAwesomeIcons.userCog,
                   color: LayoutColors.ligthness,
                 ),
                 onPressed: () => null,

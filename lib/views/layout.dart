@@ -1,4 +1,5 @@
 import 'package:debyas/views/layout/database_menu_bar.dart';
+import 'package:debyas/views/layout/layout_colors.dart';
 import 'package:debyas/views/layout/sidebar.dart';
 import 'package:debyas/views/layout/top_menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,18 +14,7 @@ class Layout {
     var layout = Container(
       width: double.infinity,
       height: double.infinity,
-      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.white,
-          width: 5,
-        ),
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          topLeft: Radius.circular(10),
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(10),
-        ),
         gradient: LinearGradient(
           colors: [
             Colors.grey[300],
@@ -35,30 +25,41 @@ class Layout {
           end: Alignment.bottomRight,
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LayoutSidebar(),
           Expanded(
-            child: Column(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TopMenu(),
+                LayoutSidebar(),
                 Expanded(
-                  child: Stack(
-                    alignment: Alignment
-                        .topLeft, // Inverte os itens para DatabaseMenuBar ficar acima do conteudo
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 51),
-                        child: content,
+                      TopMenu(),
+                      Expanded(
+                        child: Stack(
+                          alignment: Alignment
+                              .topLeft, // Inverte os itens para DatabaseMenuBar ficar acima do conteudo
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 51),
+                              child: content,
+                            ),
+                            DatabaseMenuBar(),
+                          ],
+                        ),
                       ),
-                      DatabaseMenuBar(),
                     ],
                   ),
                 ),
               ],
             ),
+          ),
+          Container(
+            color: LayoutColors.dark,
+            height: 25,
           ),
         ],
       ),

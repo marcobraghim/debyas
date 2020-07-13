@@ -15,33 +15,29 @@ class LayoutSidebar extends StatelessWidget {
       width: umQuinto > minSize ? umQuinto : minSize,
       decoration: BoxDecoration(
         color: LayoutColors.darkness,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          topLeft: Radius.circular(10),
-        ),
       ),
       child: ListView(
         children: [
           UserProfile(),
-          connectionButton(true),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          databaseButton(context),
-          connectionButton(),
-          connectionButton(),
-          connectionButton(),
+          _connectionButton(true),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _databaseButton(context),
+          _connectionButton(),
+          _connectionButton(),
+          _connectionButton(),
         ],
       ),
     );
   }
 
-  connectionButton([bool selected = false]) {
+  _connectionButton([bool selected = false]) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
       child: SizedBox(
@@ -76,7 +72,7 @@ class LayoutSidebar extends StatelessWidget {
     );
   }
 
-  databaseButton(BuildContext context) {
+  _databaseButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(45, 0, 30, 5),
       child: SizedBox(

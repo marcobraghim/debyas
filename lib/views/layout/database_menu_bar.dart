@@ -81,11 +81,17 @@ class _DatabaseMenuBarState extends State<DatabaseMenuBar> {
                 ),
               ),
             ),
-            item('tooba', 0),
-            item('buster', 1),
-            item('cereo', 2),
-            item('lider', 3),
-            item('hontaro', 4),
+            Expanded(
+              child: ListView(
+                children: [
+                  item('tooba', 0),
+                  item('buster', 1),
+                  item('cereo', 2),
+                  item('lider', 3),
+                  item('hontaro', 4),
+                ],
+              ),
+            )
           ],
         ),
       ),
