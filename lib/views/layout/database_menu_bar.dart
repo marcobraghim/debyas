@@ -11,38 +11,46 @@ class DatabaseMenuBar extends StatefulWidget {
 }
 
 class _DatabaseMenuBarState extends State<DatabaseMenuBar> {
+  //
+
+  // O box esta aberto?
   bool _isExtended = false;
-  bool _showItemText = false;
+
+  // Esta em andamento a animacao?
   bool _delaying = false;
 
+  // Numero do item selecionado
   int _selectedItem;
+
+  // Retorna true caso esteja aberto
+  // e a animacao ja terminou
+  _showItemText() {
+    return _isExtended && !_delaying;
+  }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (event) {
-        setState(() {
-          _isExtended = true;
-        });
-
         _delaying = true;
-        Future.delayed(Duration(milliseconds: 300), () {
+        Future.delayed(Duration(milliseconds: 100), () {
           if (_delaying) {
             setState(() {
-              _showItemText = true;
+              _isExtended = true;
             });
-
-            _delaying = false;
           }
         });
       },
       onExit: (event) => setState(() {
         _isExtended = false;
-
-        _showItemText = false;
         _delaying = false;
       }),
       child: AnimatedContainer(
+        onEnd: () {
+          setState(() {
+            _delaying = false;
+          });
+        },
         duration: Duration(milliseconds: 300),
         padding: const EdgeInsets.all(5),
         width: _isExtended ? 300 : 50,
@@ -76,8 +84,8 @@ class _DatabaseMenuBarState extends State<DatabaseMenuBar> {
                     : LayoutColors.dark,
                 foregroundColor: Colors.white,
               ),
-              _showItemText ? SizedBox(width: 10) : SizedBox.shrink(),
-              _showItemText
+              _showItemText() ? SizedBox(width: 10) : SizedBox.shrink(),
+              _showItemText()
                   ? Expanded(
                       child: Text(
                         '$name\n127.0.0.1',
@@ -92,18 +100,22 @@ class _DatabaseMenuBarState extends State<DatabaseMenuBar> {
                       ),
                     )
                   : SizedBox.shrink(),
-              _showItemText
+              _showItemText()
                   ? InkWell(
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: LayoutColors.ligthness,
+                          color: LayoutColors.ligth.withOpacity(.3),
+                          border: Border.all(
+                            width: 1,
+                            color: LayoutColors.ligth,
+                          ),
                         ),
                         padding: const EdgeInsets.all(7),
                         margin: const EdgeInsets.only(right: 10),
                         child: Icon(
                           FontAwesomeIcons.trashAlt,
-                          color: LayoutColors.danger,
+                          color: LayoutColors.ligthness,
                           size: 16,
                         ),
                       ),
