@@ -15,6 +15,7 @@ class TopMenu extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          _topMenuItem(context, FontAwesomeIcons.play, 'Serve'),
           _topMenuItem(context, FontAwesomeIcons.user, 'Users'),
           _topMenuItem(context, FontAwesomeIcons.cog, 'Settings'),
         ],
